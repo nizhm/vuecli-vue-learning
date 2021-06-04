@@ -1,2 +1,5 @@
 # vuecli-vue-learning
-vue CLI + vue.js Core + vue Router + Vuex
+
+Good job. This is my second project which is used to learn vue famaily technology.
+
+Wish have a good travel!
