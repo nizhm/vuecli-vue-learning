@@ -26,3 +26,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### problems
+```导入element-theme
+使用最新版本的sass-loader会报错：
+Syntax Error: TypeError: this.getOptions is not a function
+建议使用10.2.0版本（或其他可用版本）： npm install -D sass-loader@10.2.0
+```
