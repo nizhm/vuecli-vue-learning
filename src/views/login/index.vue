@@ -10,7 +10,7 @@
       </div>
     </div>
     <p class="browser">推荐使用最新的谷歌或火狐浏览器（IE升级到IE9以上）</p>
-    <p class="company">© 深圳市xxxx发展有限公司 粤ICP备12012537号 All Rights Reserved 客服电话：xxxx-xxx-xxx</p>
+    <p class="company">© 深圳市xxxx发展有限公司 粤ICP备xxxxxxxx号 All Rights Reserved 客服电话：xxxx-xxx-xxx</p>
   </div>
 </template>
 <script>
