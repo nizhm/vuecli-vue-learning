@@ -7,6 +7,7 @@ import store from './store'
 import ElementUI from 'element-ui'
 import enLang from 'element-ui/lib/locale/lang/en'
 import './styles/element-variables.scss'
+import './styles/index.scss'
 
 Vue.config.productionTip = false
 
