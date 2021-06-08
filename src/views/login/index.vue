@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     login() {
-      this.$message.success('Login')
+      this.$router.push({path: 'home'})
     }
   }
 }
