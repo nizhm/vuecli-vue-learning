@@ -31,6 +31,7 @@ export default {
 <style lang="scss">
 .login {
   background: url('../../assets/images/login/login-bg.png') no-repeat;
+  padding-top: 100px;
   .form {
     margin: 0 auto;
     width: 875px;
