@@ -9,7 +9,7 @@ function resolve(dir) {
 // page title
 const name = defaultSettings.title || 'Vue Family Learning'
 // dev port
-const port = process.env.port || process.env.npm_config_port || 9898
+const port = process.env.port || process.env.npm_config_port || 9001
 
 module.exports = {
   publicPath: '/',
@@ -24,6 +24,12 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      }
+    }
     //before: require('./mock/mock-server.js')
   }
 }

@@ -1,32 +1,64 @@
-<template>
++<template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link
+        v-for="item in routes"
+        :to="item.path"
+      >
+        {{ item.name }}
+      </router-link>
     </div>
-    <router-view/>
+    <div class="app-container">
+      <router-view/>
+    </div>
   </div>
 </template>
+
+<script>
+  import router from './router'
+  export default {
+    name: 'App',
+    computed: {
+      routes() {
+        return router.options.routes
+      }
+    },
+    data() {
+      return {}
+    },
+    methods: {
+    }
+  }
+</script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  display: flex;
 }
 
 #nav {
-  padding: 30px;
+  width: 15%;
+  height: 770px;
+  padding: 20px;
+  background-color: antiquewhite;
 }
 
 #nav a {
+  line-height: 20px;
   font-weight: bold;
   color: #2c3e50;
+  display: block;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+  .app-container {
+    width: 90%;
+  }
 </style>
