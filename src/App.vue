@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link
         v-for="item in routes"
+        :key="item.path"
         :to="item.path"
       >
         {{ item.name }}
@@ -60,5 +61,6 @@
 }
   .app-container {
     width: 90%;
+    height: 770px;
   }
 </style>

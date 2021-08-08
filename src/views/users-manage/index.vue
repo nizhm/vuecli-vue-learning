@@ -5,6 +5,7 @@
         class="search-form"
         ref="searchForm"
         :model="searchForm"
+        :inline="true"
       >
         <el-form-item label="Name：">
           <el-input
@@ -20,12 +21,13 @@
             :maxLength="32"
           ></el-input>
         </el-form-item>
-      </el-form>
-      <div class="btn-box">
         <el-button type="primary" @click.prevent="onSearch">查询</el-button>
-      </div>
+      </el-form>
     </el-card>
     <el-card>
+      <p>
+        <el-button type="primary" @click.prevent="onAdd">新增</el-button>
+      </p>
       <el-table
         class="multiple-table"
         ref="multipleTable"
@@ -44,26 +46,70 @@
         </el-table-column>
         <el-table-column label="Operations">
           <template slot-scope="{ row }">
-            <el-button type="text" @click.prevent="onEdit">Edit</el-button>
+            <el-button type="text" @click.prevent="onModify(row)">Modify</el-button>
             <el-button type="text" @click.prevent="onDelete">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
+    <el-dialog
+      customClass="add-dialog"
+      width="600px"
+      ref="addDialog"
+      :visible.sync="visible"
+    >
+      <div slot="title">{{ title }}</div>
+      <el-form
+        class="add-form"
+        ref="addForm"
+        :model="addForm"
+        :inline="false"
+      >
+        <el-form-item label="Name：">
+          <el-input
+            v-model="addForm.name"
+            clearable
+            :maxLength="32"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Password：">
+          <el-input
+            v-model="addForm.password"
+            clearable
+            :maxLength="32"
+          ></el-input>
+        </el-form-item>
+        <el-button
+          type="primary"
+          :loading="addRequesting"
+          @click.prevent="title === 'Add' ? addUser() : modifyUser()"
+        >
+          {{ title }}
+        </el-button>
+        <el-button @click.prevent="visible = false">Cancel</el-button>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 <script>
-  import { getList } from '../../api/users-manage'
+  import { getList, addUser, modifyUser, deleteUser } from '../../api/users-manage'
   export default {
     name: 'users-manage',
     data() {
       return {
         listLoading: false,
+        addRequesting: false,
+        visible: false,
         searchForm: {
           name: '',
           password: ''
         },
-        tableList: []
+        addForm: {
+          name: '',
+          password: ''
+        },
+        tableList: [],
+        title: 'Add'
       }
     },
     methods: {
@@ -77,11 +123,41 @@
           this.listLoading = false
         })
       },
-      onEdit() {
-        console.log('Edit')
+      onAdd() {
+        this.title = 'Add'
+        this.addForm.userId = undefined
+        this.addForm.name = ''
+        this.addForm.password = ''
+        this.visible = true
+      },
+      addUser() {
+        this.addRequesting = true
+        addUser(this.addForm).then(res => {
+          if(res.code !== 200) {
+            this.addRequesting = false
+            this.$message.error(res.msg)
+          }else {
+            this.addRequesting = false
+            this.$message.success('新增成功')
+            this.visible = false
+            this.onSearch()
+          }
+        }).catch(err => {})
+      },
+      onModify(row) {
+        this.title = 'Modify'
+        this.addForm.name = row.name
+        this.addForm.password = row.password
+        this.addForm.userId = row.userId
+        this.visible = true
+      },
+      modifyUser() {
+        modifyUser(this.addForm).then(res => {
+        }).catch(err => {})
       },
       onDelete() {
-        console.log('Delete')
+        deleteUser(this.addForm).then(res => {
+        }).catch(err => {})
       }
     },
     created() {
@@ -94,5 +170,8 @@
     background-color: aliceblue;
     border-radius: 6px;
     margin: 20px;
+  }
+  .btn-box {
+    display: inline-block;
   }
 </style>

@@ -9,10 +9,12 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
+    if(config.method === 'get' && config.params) {
+      config.params.t = Date.now()
+    }
     config.headers['Authorization'] = '123456'
     config.headers['Content-type'] = 'application/json'
     return config
-
   },
   error => {
     Promise.reject(error)
@@ -29,7 +31,6 @@ service.interceptors.response.use(
       return Promise.reject('error')
     }else {
       const { headers, data } = response
-      console.info(headers)
       return data
     }
   },
