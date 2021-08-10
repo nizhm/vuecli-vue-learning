@@ -21,18 +21,19 @@
             :maxLength="32"
           ></el-input>
         </el-form-item>
-        <el-button type="primary" @click.prevent="onSearch">查询</el-button>
+        <el-button type="primary" @click.prevent="onSearch">Search</el-button>
       </el-form>
     </el-card>
     <el-card>
-      <p>
-        <el-button type="primary" @click.prevent="onAdd">新增</el-button>
-      </p>
+      <div class="btn-box">
+        <el-button type="primary" @click.prevent="onAdd">Add</el-button>
+      </div>
       <el-table
         class="multiple-table"
         ref="multipleTable"
         v-loading="listLoading"
         :data="tableList"
+        maxHeight="590px"
       >
         <el-table-column label="Name" prop="name">
           <template slot-scope="{ row }">
@@ -47,7 +48,7 @@
         <el-table-column label="Operations">
           <template slot-scope="{ row }">
             <el-button type="text" @click.prevent="onModify(row)">Modify</el-button>
-            <el-button type="text" @click.prevent="onDelete">Delete</el-button>
+            <el-button type="text" @click.prevent="onDelete(row.userId)">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -57,6 +58,7 @@
       width="600px"
       ref="addDialog"
       :visible.sync="visible"
+      :closeOnClickModal="false"
     >
       <div slot="title">{{ title }}</div>
       <el-form
@@ -153,10 +155,30 @@
       },
       modifyUser() {
         modifyUser(this.addForm).then(res => {
+          const { code } = res
+          if(code !== 200) {
+            const { msg } = res
+            this.$message.error(msg)
+          }else {
+            this.visible = false
+            this.$message.success('修改成功')
+            this.onSearch()
+          }
         }).catch(err => {})
       },
-      onDelete() {
-        deleteUser(this.addForm).then(res => {
+      onDelete(userId) {
+        const query = {
+          userId: userId
+        }
+        deleteUser(query).then(res => {
+          const { code } = res
+          if(code !== 200) {
+            const { msg } = res
+            this.$message.error(msg)
+          }else {
+            this.$message.success('删除成功')
+            this.onSearch()
+          }
         }).catch(err => {})
       }
     },
@@ -165,7 +187,10 @@
     }
   }
 </script>
-<style>
+<style lang="scss">
+  .btn-box {
+    padding-bottom: 8px;
+  }
   .el-card {
     background-color: aliceblue;
     border-radius: 6px;

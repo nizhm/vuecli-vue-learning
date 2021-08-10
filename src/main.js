@@ -14,8 +14,7 @@ console.log(Object.getOwnPropertyNames(new Vue))
 
 Vue.use(ElementUI, {
   size: 'small',
-  zIndex: 3000,
-  locale: enLang
+  zIndex: 3000
 })
 
 new Vue({
