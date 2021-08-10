@@ -7,7 +7,16 @@ import './styles/index.scss'
 import './styles/element-variables.scss'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+
+console.log(Vue.name)
+console.log(Object.getOwnPropertyNames(Vue))
+console.log(Object.getOwnPropertyNames(new Vue))
+
+Vue.use(ElementUI, {
+  size: 'small',
+  zIndex: 3000,
+  locale: enLang
+})
 
 new Vue({
   router,
