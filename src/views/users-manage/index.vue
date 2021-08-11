@@ -33,7 +33,6 @@
         ref="multipleTable"
         v-loading="listLoading"
         :data="tableList"
-        maxHeight="590px"
       >
         <el-table-column label="Name" prop="name">
           <template slot-scope="{ row }">

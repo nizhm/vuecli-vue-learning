@@ -1,4 +1,4 @@
-+<template>
+<template>
   <div id="app">
     <div id="nav">
       <router-link
@@ -32,19 +32,20 @@
   }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  display: flex;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 #nav {
-  width: 15%;
-  height: 770px;
-  padding: 20px;
+  width: 10%;
+  height: 100%;
+  overflow: auto;
   background-color: antiquewhite;
 }
 
@@ -61,6 +62,7 @@
 }
   .app-container {
     width: 90%;
-    height: 770px;
+    height: 100%;
+    overflow: auto;
   }
 </style>
