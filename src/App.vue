@@ -43,6 +43,7 @@
 }
 
 #nav {
+  display: inline-block;
   width: 10%;
   height: 100%;
   overflow: auto;
@@ -61,6 +62,7 @@
   color: #42b983;
 }
   .app-container {
+    display: inline-block;
     width: 90%;
     height: 100%;
     overflow: auto;

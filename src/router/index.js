@@ -22,6 +22,11 @@ const routes = [
     path: '/users-manage',
     name: '用户管理',
     component: () => import('../views/users-manage')
+  },
+  {
+    path: '/upload',
+    name: '文件上传',
+    component: () => import('../views/upload')
   }
 ]
 
