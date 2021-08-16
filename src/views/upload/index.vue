@@ -213,7 +213,6 @@
             this.$message.error(res.msg || '获取图片失败')
             file.status = preStatus
           }else {
-            console.log(res)
             const url = window.URL.createObjectURL(new Blob([res]));
             if(window.navigator.msSaveBlob) {
               try {
@@ -232,7 +231,6 @@
           }
         }).catch(err => {
           file.status = preStatus
-          console.error(err)
           this.$message.error(err.message || '下载失败')
         })
       },
@@ -262,7 +260,7 @@
           }
         }).catch(err => {
           file.status = preStatus
-          console.error(err.toString())
+          this.$message.error(err.toString())
         })
       },
       closeViewer() {

@@ -11,12 +11,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/author-nzhming',
+    name: 'of I',
+    component: () => import('../views/author')
   },
   {
     path: '/users-manage',
@@ -27,6 +24,11 @@ const routes = [
     path: '/upload',
     name: '文件上传',
     component: () => import('../views/upload')
+  },
+  {
+    path: '/v-bind-usage',
+    name: 'v-bind语法',
+    component: () => import('../views/v-bind-usage')
   }
 ]
 

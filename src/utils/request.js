@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import { Message } from 'element-ui';
 
 // 创建axios实例
 const service = axios.create({
@@ -27,28 +28,49 @@ service.interceptors.response.use(
     const { code } = response.data
     if(code < 200 || code > 300) {
       const { msg } = response.data
-      console.error(msg || '请求出错')
+      Message({
+        message: msg || '请求出错',
+        type: 'error',
+        duration: 5 * 1000
+      })
       return Promise.reject('error')
     }else {
-      const { headers, data } = response
+      const { data } = response
       return data
     }
   },
   error => {
+    console.log(error.response)
     let code = undefined
     try {
-      code = error.response.data.status
+      code = error.response.status
     } catch (e) {
-      console.error(error)
+      Message({
+        message: error || '请求出错',
+        type: 'error',
+        duration: 5 * 1000
+      })
       return Promise.reject('error')
     }
     if(!code) {
-      console.error('接口请求失败')
+      Message({
+        message: '接口请求失败',
+        type: 'error',
+        duration: 5 * 1000
+      })
     }else {
       if(code === 401) {
-        console.error('登录过期')
+        Message({
+          message: '登录过期',
+          type: 'error',
+          duration: 5 * 1000
+        })
       }else {
-        console.error(error)
+        Message({
+          message: error.response.data.msg || error.statusText || '请求出错',
+          type: 'error',
+          duration: 5 * 1000
+        })
       }
       return Promise.reject('error')
     }
