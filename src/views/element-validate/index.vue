@@ -11,7 +11,7 @@
         :model="ipForm"
         :rules="rules"
       >
-        <el-form-item label="IP Pattern">
+        <el-form-item label="IP Pattern:">
           <el-input
             v-model="ipForm.ipPattern"
             clearable
@@ -20,6 +20,12 @@
         <el-form-item label="IP Address:" prop="ipString">
           <el-input
             v-model="ipForm.ipString"
+            clearable
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Price:" prop="price">
+          <el-input
+            v-model="ipForm.price"
             clearable
           ></el-input>
         </el-form-item>
@@ -35,15 +41,22 @@
       '([0-9]|[1-9]\\d|1\\d\\d|2[012345][012345])[.]' +
       '([0-9]|[1-9]\\d|1\\d\\d|2[012345][012345])[.]' +
       '([1-9]|[1-9]\\d|1\\d\\d|2[012345][012345])$'
+      const pricePattern = '^([1-9]\\d{0,3}|\\d[.]\\d{1,3})$'
       return {
         ipForm: {
           ipPattern: ipPattern,
-          ipString: ''
+          ipString: '',
+          price: ''
         },
         rules: {
           ipString: [
             {
               pattern: ipPattern, message: 'IP地址不合法', trigger: 'change'
+            }
+          ],
+          price: [
+            {
+              pattern: pricePattern, message: '价格不合法', trigger: 'change'
             }
           ]
         }
