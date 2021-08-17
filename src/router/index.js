@@ -26,6 +26,11 @@ const routes = [
     component: () => import('../views/upload')
   },
   {
+    path: '/fetch-image',
+    name: 'fetchImage',
+    component: () => import('../views/fetch-image')
+  },
+  {
     path: '/v-bind-usage',
     name: 'v-bind语法',
     component: () => import('../views/v-bind-usage')
