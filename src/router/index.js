@@ -29,6 +29,11 @@ const routes = [
     path: '/v-bind-usage',
     name: 'v-bind语法',
     component: () => import('../views/v-bind-usage')
+  },
+  {
+    path: '/element-validate',
+    name: 'Element Validation',
+    component: () => import('../views/element-validate')
   }
 ]
 
