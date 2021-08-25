@@ -36,6 +36,11 @@ const routes = [
     component: () => import('../views/v-bind-usage')
   },
   {
+    path: '/v-model-usage',
+    name: 'v-model语法',
+    component: () => import('../views/v-model-usage')
+  },
+  {
     path: '/element-validate',
     name: 'Element Validation',
     component: () => import('../views/element-validate')
