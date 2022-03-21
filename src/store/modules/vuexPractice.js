@@ -1,6 +1,11 @@
 const state = {
   globalName: 'nizhm',
-  globalAge: 24
+  globalAge: '24',
+  globalHeight: '173',
+  globalWeight: '60',
+  globalCountry: 'China',
+  globalProvince: 'GuangXi',
+  globalWorkProvince: 'HuNan'
 }
 
 const mutations = {
