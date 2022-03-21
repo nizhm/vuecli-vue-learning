@@ -1,5 +1,3 @@
-import el from 'element-ui/src/locale/lang/el'
-
 const state = {
   globalName: 'nizhm',
   globalAge: '24',
