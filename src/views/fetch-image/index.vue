@@ -81,6 +81,7 @@
         this.base64SRC = ''
       },
       fetchImage() {
+
         const url = this.url
         axios({
           method: 'get',

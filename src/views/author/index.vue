@@ -44,7 +44,7 @@
         weight: 60,
         height: 173.5,
         job: 'front-end engineer',
-        believe: `Don't talk, show me you code`
+        believe: 'Talk is cheap, show me you code'
       }
     }
   }
