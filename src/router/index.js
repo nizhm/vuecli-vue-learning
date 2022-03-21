@@ -44,6 +44,31 @@ const routes = [
     path: '/element-validate',
     name: 'Element Validation',
     component: () => import('../views/element-validate')
+  },
+  {
+    path: '/window',
+    name: 'Window',
+    component: () => import('../views/window')
+  },
+  {
+    path: '/worker',
+    name: 'Worker',
+    component: () => import('../views/worker')
+  },
+  {
+    path: '/country',
+    name: 'Country',
+    component: () => import('../views/worlds-country')
+  },
+  {
+    path: '/vue',
+    name: 'Vue',
+    component: () => import('../views/vue/component-demo')
+  },
+  {
+    path: '/vuex-practice',
+    name: 'vuex-practice',
+    component: () => import('../views/vuex-practice')
   }
 ]
 
