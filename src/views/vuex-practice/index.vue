@@ -130,9 +130,34 @@
         <p class="content">{{ globalWorkProvince }}</p>
       </el-col>
     </el-row>
-    <p>
-      <el-button type="primary" @click="exploreVuexMap">exploreVuexMap</el-button>
-    </p>
+    <el-row>
+      <p>
+        <el-button type="primary" @click="exploreVuexMap">exploreVuexMap</el-button>
+      </p>
+    </el-row>
+    <el-row>
+      <section>
+        <p>
+          <span>Year: </span>
+          <el-select v-model="year">
+            <el-option :value="undefined" label="全部"></el-option>
+            <el-option
+              v-for="item in yearOptions"
+              :key="item"
+              :value="item"
+            ></el-option>
+          </el-select>
+        </p>
+        <el-table
+          :data="tableData"
+          height="260px"
+        >
+          <el-table-column type="index" label="Index" width="80px"></el-table-column>
+          <el-table-column prop="time" label="Time"></el-table-column>
+          <el-table-column prop="salary" label="Salary"></el-table-column>
+        </el-table>
+      </section>
+    </el-row>
   </div>
 </template>
 
@@ -150,7 +175,21 @@ export default {
       weight: '60',
       country: 'China',
       province: 'GuangXi',
-      workProvince: 'HuNan'
+      workProvince: 'HuNan',
+      year: undefined,
+      tableData: []
+    }
+  },
+  watch: {
+    yearOptions (newValue) {
+      if (newValue.length) {
+        this.year = newValue[newValue.length - 1]
+      } else {
+        this.year = undefined
+      }
+    },
+    year (newValue) {
+      this.tableData = this.getSalariesByYear(newValue ? [newValue] : this.yearOptions)
     }
   },
   computed: {
@@ -186,7 +225,7 @@ export default {
     heightByMeter () {
       return this.$store.getters['vuexPractice/heightByMeter']
     },
-    ...mapGetters('vuexPractice', ['weightByJin', 'bodyMeasureIndexByGetter'])
+    ...mapGetters('vuexPractice', ['weightByJin', 'bodyMeasureIndexByGetter', 'yearOptions', 'getSalariesByYear'])
   },
   methods: {
     // map `this.SET_GLOBAL_WEIGHT(payload)` to `this.$store.commit('vuexPractice/SET_GLOBAL_WEIGHT', payload)`

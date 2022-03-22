@@ -6,7 +6,11 @@ const state = {
   globalCountry: 'China',
   globalProvince: 'GuangXi',
   globalWorkProvince: 'HuNan',
-  salaries: {
+  salaries: {}
+}
+
+setTimeout(() => {
+  const obj = {
     2020: [
       { time: '2020-08', salary: 8000 },
       { time: '2020-09', salary: 8000 },
@@ -33,7 +37,8 @@ const state = {
       { time: '2022-02', salary: 9500 }
     ]
   }
-}
+  state.salaries = obj
+}, 300)
 
 const getters = {
   heightByMeter: state => {
@@ -50,8 +55,18 @@ const getters = {
       return parseInt(state.globalWeight) * 2
     }
   },
-  bodyMeasureIndexByGetter: (state, getters) => {
+  bodyMeasureIndexByGetter: (state, getters, rootState, rootGetters) => {
     return state.globalWeight / (getters.heightByMeter ** 2)
+  },
+  yearOptions: state => Object.keys(state.salaries),
+  getSalariesByYear: state => yearArray => {
+    let list = []
+    if (yearArray.length) {
+      yearArray.forEach(item => {
+        list = [...list, ...state.salaries[item]]
+      })
+    }
+    return list
   }
 }
 
