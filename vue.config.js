@@ -31,5 +31,12 @@ module.exports = {
       }
     }
     //before: require('./mock/mock-server.js')
-  }
+  },
+  //rules: {
+  //  test: /\.worker\.js$/, //以.worker.js结尾的文件将被worker-loader加载
+  //  use: {
+  //    loader: 'worker-loader' ,
+  //    options: { inline: true, name: 'workerName.[hash].js' }
+  //  }
+  //}
 }
