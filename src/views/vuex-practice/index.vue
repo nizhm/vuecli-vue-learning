@@ -197,9 +197,11 @@ export default {
     // use store to retrieve state, however it causes the component to rely on the global store singleton;
     // @see https://v3.vuex.vuejs.org/guide/state.html#getting-vuex-state-into-vue-components
     globalName () {
+      // will report an error within console-devtool in strict mode;
       return store.state.vuexPractice.globalName
     },
     globalAge () {
+      // will report an error within console-devtool in strict mode;
       return this.$store.state.vuexPractice.globalAge
     },
     // use arrow function;
