@@ -87,6 +87,7 @@ const actions = {
 }
 
 export default {
+  // set true to give getters/mutations/actions a module symbol;
   namespaced: true,
   state,
   getters,

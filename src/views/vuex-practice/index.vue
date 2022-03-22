@@ -183,7 +183,10 @@ export default {
         return this.globalWeightWithDifferentKeyName / ((state.vuexPractice.globalHeight / 100) ** 2)
       }
     }),
-    ...mapGetters('vuexPractice', ['heightByMeter', 'weightByJin', 'bodyMeasureIndexByGetter'])
+    heightByMeter () {
+      return this.$store.getters['vuexPractice/heightByMeter']
+    },
+    ...mapGetters('vuexPractice', ['weightByJin', 'bodyMeasureIndexByGetter'])
   },
   methods: {
     // map `this.SET_GLOBAL_WEIGHT(payload)` to `this.$store.commit('vuexPractice/SET_GLOBAL_WEIGHT', payload)`
