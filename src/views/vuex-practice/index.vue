@@ -133,6 +133,7 @@
     <el-row>
       <p>
         <el-button type="primary" @click="exploreVuexMap">exploreVuexMap</el-button>
+        <span>(Tips: Something printed in console-devtool after clicked)</span>
       </p>
     </el-row>
     <el-row>
