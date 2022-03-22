@@ -130,6 +130,9 @@
         <p class="content">{{ globalWorkProvince }}</p>
       </el-col>
     </el-row>
+    <p>
+      <el-button type="primary" @click="exploreVuexMap">exploreVuexMap</el-button>
+    </p>
   </div>
 </template>
 
@@ -173,7 +176,7 @@ export default {
     }),
     // pass a string array;
     // map state to the same local keyName;
-    ...mapState('vuexPractice', ['globalCountry', 'globalProvince', 'globalWorkProvince']),
+    ...mapState('vuexPractice', ['globalCountry', 'globalProvince', 'globalWorkProvince', 'salaries']),
     // access this object by using standard function;
     ...mapState({
       bodyMeasureIndex (state) {
@@ -216,6 +219,25 @@ export default {
     },
     refreshWorkProvince () {
       this.changeGlobalWorkProvince({ workProvince: this.workProvince })
+    },
+    exploreVuexMap () {
+      /**
+       * return or map in computed
+       *
+       * 1.primitive value: the same;
+       * 2.reference value: also the same;
+       * 3.deepClone one level Object: spread operator;
+       * 4.deepClone nested Object(only plain object and array): JSON.parse(JSON.stringify());
+       *
+       * @type {any}
+       */
+      const list = { ...this.salaries }
+      console.log(JSON.parse(JSON.stringify(this.salaries)))
+      // this change will affect `this.salaries[2020][0]`
+      list[2020][0].salary = 10000
+      // log false
+      console.log(list === this.salaries)
+      console.log(JSON.parse(JSON.stringify(this.salaries)))
     }
   }
 }

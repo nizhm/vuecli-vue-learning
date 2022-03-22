@@ -5,7 +5,34 @@ const state = {
   globalWeight: '60',
   globalCountry: 'China',
   globalProvince: 'GuangXi',
-  globalWorkProvince: 'HuNan'
+  globalWorkProvince: 'HuNan',
+  salaries: {
+    2020: [
+      { time: '2020-08', salary: 8000 },
+      { time: '2020-09', salary: 8000 },
+      { time: '2020-10', salary: 8000 },
+      { time: '2020-11', salary: 8000 },
+      { time: '2020-12', salary: 8000 }
+    ],
+    2021: [
+      { time: '2021-01', salary: 8000 },
+      { time: '2021-02', salary: 8000 },
+      { time: '2021-03', salary: 8000 },
+      { time: '2021-04', salary: 8000 },
+      { time: '2021-05', salary: 8000 },
+      { time: '2021-06', salary: 8000 },
+      { time: '2021-07', salary: 8000 },
+      { time: '2021-08', salary: 8000 },
+      { time: '2021-09', salary: 8000 },
+      { time: '2021-10', salary: 8000 },
+      { time: '2021-11', salary: 9500 },
+      { time: '2021-12', salary: 9500 }
+    ],
+    2022: [
+      { time: '2022-01', salary: 9500 },
+      { time: '2022-02', salary: 9500 }
+    ]
+  }
 }
 
 const getters = {
