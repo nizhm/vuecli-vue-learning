@@ -133,6 +133,7 @@
     <el-row>
       <p>
         <el-button type="primary" @click="exploreVuexMap">exploreVuexMap</el-button>
+        <el-button type="primary" @click="exploreVuexObject">exploreVuexObject</el-button>
         <span>(Tips: Something printed in console-devtool after clicked)</span>
       </p>
     </el-row>
@@ -283,6 +284,17 @@ export default {
       // log false
       console.log(list === this.salaries)
       console.log(JSON.parse(JSON.stringify(this.salaries)))
+    },
+    exploreVuexObject () {
+      console.log('-------------------------------------')
+      this.$store.dispatch('changeLocation', 'root')
+      this.$store.dispatch('testParameter/changeLocation', 'testParameter')
+      // this.$store.commit('SET_LOCATION', 'root', { key: 123 }, 123)
+      // this.$store.commit('testParameter/SET_LOCATION', 'root', { key: 123 }, 123)
+      // this.$store.getters['getLocalData']
+      // this.$store.getters['testParameter/getLocalData']
+      console.log(this.$store)
+      console.log(this.$store['_actions'])
     }
   }
 }

@@ -1,26 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
-// https://webpack.js.org/guides/dependency-management/#requirecontext
-const modulesFiles = require.context('./modules', true, /\.js$/)
-
-const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  const value = modulesFiles(modulePath)
-  modules[moduleName] = value.default
-  return modules
-}, {})
-
 const state = {
-  location: 'root',
+  location: 'testParameter',
   localData: {
-    insideArray: [1, 2, 3],
+    insideArray: ['test', 'parameter'],
     insideData: {
-      2020: 2020,
-      2021: 2021,
-      2022: 2022
+      2020: 'test',
+      2021: 'parameter'
     }
   }
 }
@@ -43,7 +27,7 @@ const mutations = {
     console.log(state)
     console.log(payload)
     console.log('Mutation SET_LOCATION end')
-    state.location = 'root'
+    state.location = 'testParameter'
   }
 }
 
@@ -62,13 +46,10 @@ const actions = {
   }
 }
 
-const store = new Vuex.Store({
-  strict: true,
+export default {
+  namespaced: true,
   state,
   getters,
   mutations,
-  actions,
-  modules
-})
-
-export default store
+  actions
+}
