@@ -26,7 +26,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const { code } = response.data
-    if(code < 200 || code > 300) {
+    if((code < 200 || code > 300) && code !== '1') {
       const { msg } = response.data
       Message({
         message: msg || '请求出错',

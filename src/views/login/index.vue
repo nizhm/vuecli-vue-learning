@@ -2,11 +2,25 @@
   <div class="login">
     <div class="form">
       <div class="form-left">
-        <p class="form-left_title-cn">全球领先的云通讯平台</p>
-        <p class="form-left_title-en">The world's leading cloud communication platform</p>
-      </div>
-      <div class="form-right">
-        <el-button class="login-btn" type="primary" @click="login">Login</el-button>
+        <p class="form-left_title-cn">中国人寿</p>
+        <p class="form-left_title-en">China Life</p>
+        <el-form
+          :model="loginForm"
+          :rules="rules"
+          ref="loginForm"
+          label-width="100px"
+          class="loginForm">
+          <el-form-item label="用户名" prop="userName">
+            <el-input v-model="loginForm.userName"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input v-model="loginForm.password"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button class="login-btn" type="primary" :loading="loading" @click="login">登录</el-button>
+            <el-button @click="resetForm">重置</el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </div>
     <p class="browser">推荐使用最新的谷歌或火狐浏览器（IE升级到IE9以上）</p>
@@ -14,16 +28,50 @@
   </div>
 </template>
 <script>
+import { login } from '@/api/login'
 export default {
   name: 'Login',
-  data() {
+  data () {
     return {
-      name: 'nizm'
+      loading: false,
+      loginForm: {
+        userName: undefined,
+        password: undefined
+      },
+      rules: {
+        userName: [{ required: true, message: '请输入用户名' }],
+        password: [{ required: true, message: '请输入密码' }]
+      }
     }
   },
   methods: {
-    login() {
-      this.$router.push({path: 'home'})
+    login () {
+      if (this.loading) return
+      this.loading = true
+      this.$refs.loginForm.validate(valid => {
+        if (!valid) {
+          this.loading = false
+          return
+        }
+        login(this.loginForm).then(res => {
+          if (res.code !== '1') {
+            this.$message.error(res.message || '登录失败')
+            throw res
+          }
+          if (res.data.url) {
+            window.open(res.data.url, '_self')
+          } else {
+            this.$router.push('/')
+          }
+        }).catch(err => {
+          console.error(err)
+        }).finally(() => {
+          this.loading = false
+        })
+      })
+    },
+    resetForm () {
+      this.$refs.loginForm.resetFields()
     }
   }
 }
@@ -43,7 +91,7 @@ export default {
       display: inline-block;
       width: 400px;
       height: 570px;
-      background: url('../../assets/images/login/form-left-bg.png') no-repeat;
+      background: url('../../assets/images/login/china-life.png') no-repeat;
       border-radius: 20px 0px 0px 20px;
       color: #FFFFFF;
       .form-left_title-cn {

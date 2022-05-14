@@ -69,6 +69,16 @@ const routes = [
     path: '/vuex-practice',
     name: 'vuex-practice',
     component: () => import('../views/vuex-practice')
+  },
+  {
+    path: '/html',
+    name: 'html',
+    component: () => import('../views/html')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login')
   }
 ]
 

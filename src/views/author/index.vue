@@ -39,7 +39,7 @@
     name: 'UserInfo',
     data() {
       return {
-        userName: 'nzhming',
+        userName: 'y',
         age: 24,
         weight: 60,
         height: 173.5,
