@@ -73,6 +73,11 @@ export default {
     resetForm () {
       this.$refs.loginForm.resetFields()
     }
+  },
+  created () {
+    console.log(this.$route)
+    const { code } = this.$route.query
+    this.loginForm.code = code
   }
 }
 </script>

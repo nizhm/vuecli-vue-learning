@@ -93,98 +93,99 @@
   </div>
 </template>
 <script>
-  import { getList, addUser, modifyUser, deleteUser } from '../../api/users-manage'
-  export default {
-    name: 'users-manage',
-    data() {
-      return {
-        listLoading: false,
-        addRequesting: false,
-        visible: false,
-        searchForm: {
-          name: '',
-          password: ''
-        },
-        addForm: {
-          name: '',
-          password: ''
-        },
-        tableList: [],
-        title: 'Add'
-      }
-    },
-    methods: {
-      onSearch() {
-        this.listLoading = true
-        getList(this.searchForm).then(res => {
-          this.tableList = res.data
-          this.listLoading = false
-        }).catch(err => {
-          console.log(err)
-          this.listLoading = false
-        })
+import { getList, addUser, modifyUser, deleteUser } from '../../api/users-manage'
+export default {
+  name: 'users-manage',
+  data () {
+    return {
+      listLoading: false,
+      addRequesting: false,
+      visible: false,
+      searchForm: {
+        name: '',
+        password: ''
       },
-      onAdd() {
-        this.title = 'Add'
-        this.addForm.userId = undefined
-        this.addForm.name = ''
-        this.addForm.password = ''
-        this.visible = true
+      addForm: {
+        name: '',
+        password: ''
       },
-      addUser() {
-        this.addRequesting = true
-        addUser(this.addForm).then(res => {
-          if(res.code !== 200) {
-            this.addRequesting = false
-            this.$message.error(res.msg)
-          }else {
-            this.addRequesting = false
-            this.$message.success('新增成功')
-            this.visible = false
-            this.onSearch()
-          }
-        }).catch(err => {})
-      },
-      onModify(row) {
-        this.title = 'Modify'
-        this.addForm.name = row.name
-        this.addForm.password = row.password
-        this.addForm.userId = row.userId
-        this.visible = true
-      },
-      modifyUser() {
-        modifyUser(this.addForm).then(res => {
-          const { code } = res
-          if(code !== 200) {
-            const { msg } = res
-            this.$message.error(msg)
-          }else {
-            this.visible = false
-            this.$message.success('修改成功')
-            this.onSearch()
-          }
-        }).catch(err => {})
-      },
-      onDelete(userId) {
-        const query = {
-          userId: userId
-        }
-        deleteUser(query).then(res => {
-          const { code } = res
-          if(code !== 200) {
-            const { msg } = res
-            this.$message.error(msg)
-          }else {
-            this.$message.success('删除成功')
-            this.onSearch()
-          }
-        }).catch(err => {})
-      }
-    },
-    created() {
-      this.onSearch()
+      tableList: [],
+      title: 'Add'
     }
+  },
+  methods: {
+    onSearch () {
+      this.listLoading = true
+      getList(this.searchForm).then(res => {
+        this.tableList = res.data
+        this.listLoading = false
+      }).catch(err => {
+        console.log(err)
+        this.listLoading = false
+      })
+    },
+    onAdd () {
+      this.title = 'Add'
+      this.addForm.userId = undefined
+      this.addForm.name = ''
+      this.addForm.password = ''
+      this.visible = true
+    },
+    addUser () {
+      this.addRequesting = true
+      addUser(this.addForm).then(res => {
+        if (res.code !== 200) {
+          this.addRequesting = false
+          this.$message.error(res.msg)
+        } else {
+          this.addRequesting = false
+          this.$message.success('新增成功')
+          this.visible = false
+          this.onSearch()
+        }
+      }).catch(err => {})
+    },
+    onModify (row) {
+      this.title = 'Modify'
+      this.addForm.name = row.name
+      this.addForm.password = row.password
+      this.addForm.userId = row.userId
+      this.visible = true
+    },
+    modifyUser () {
+      modifyUser(this.addForm).then(res => {
+        const { code } = res
+        if (code !== 200) {
+          const { msg } = res
+          this.$message.error(msg)
+        } else {
+          this.visible = false
+          this.$message.success('修改成功')
+          this.onSearch()
+        }
+      }).catch(err => {})
+    },
+    onDelete (userId) {
+      const query = {
+        userId: userId
+      }
+      deleteUser(query).then(res => {
+        const { code } = res
+        if (code !== 200) {
+          const { msg } = res
+          this.$message.error(msg)
+        } else {
+          this.$message.success('删除成功')
+          this.onSearch()
+        }
+      }).catch(err => {})
+    }
+  },
+  created () {
+    console.log(this.$route)
+    this.onSearch()
   }
+}
 </script>
 <style lang="scss">
   .btn-box {
