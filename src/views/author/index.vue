@@ -32,22 +32,26 @@
         <el-col :span="10">{{ believe }}</el-col>
       </el-row>
     </div>
+    <child></child>
   </div>
 </template>
 <script>
-  export default {
-    name: 'UserInfo',
-    data() {
-      return {
-        userName: 'y',
-        age: 24,
-        weight: 60,
-        height: 173.5,
-        job: 'front-end engineer',
-        believe: 'Talk is cheap, show me you code'
-      }
+import Child from '@/views/author/components/Child'
+
+export default {
+  name: 'UserInfo',
+  components: { Child },
+  data () {
+    return {
+      userName: 'y',
+      age: 24,
+      weight: 60,
+      height: 173.5,
+      job: 'front-end engineer',
+      believe: 'Talk is cheap, show me you code'
     }
   }
+}
 </script>
 <style lang="scss">
   .author {
